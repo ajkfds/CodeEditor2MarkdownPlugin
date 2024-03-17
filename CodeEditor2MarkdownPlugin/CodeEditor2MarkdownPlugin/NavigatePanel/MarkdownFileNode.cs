@@ -46,7 +46,7 @@ namespace pluginMarkdown.NavigatePanel
 
         //public override void OnSelected()
         //{
-        //    codeEditor.Controller.CodeEditor.SetTextFile(TextFile);
+        //    CodeEditor2.Controller.CodeEditor.SetTextFile(TextFile);
         //}
     }
 }
