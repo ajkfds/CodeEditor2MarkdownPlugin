@@ -15,9 +15,9 @@ namespace pluginMarkdown.Data
             MarkdownFile fileItem = new MarkdownFile();
             fileItem.Project = project;
             fileItem.RelativePath = relativePath;
-            if (relativePath.Contains('\\'))
+            if (relativePath.Contains(System.IO.Path.DirectorySeparatorChar))
             {
-                fileItem.Name = relativePath.Substring(relativePath.LastIndexOf('\\') + 1);
+                fileItem.Name = relativePath.Substring(relativePath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1);
             }
             else
             {
