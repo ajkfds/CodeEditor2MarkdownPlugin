@@ -36,7 +36,7 @@ namespace pluginMarkdown.Parser
             int end = start + document.GetLineLength(line);
             for (int i = start; i < end; i++)
             {
-                document.SetColorAt(i, (byte)color);
+                document.TextColors.SetColorAt(i, (byte)color);
             }
         }
     }
