@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeEditor2.CodeEditor.Parser;
 
 namespace pluginMarkdown.Data
 {
@@ -34,7 +35,7 @@ namespace pluginMarkdown.Data
             return new CodeEditor2.NavigatePanel.TextFileNode(this);
         }
 
-        public override CodeEditor2.CodeEditor.DocumentParser CreateDocumentParser(CodeEditor2.CodeEditor.DocumentParser.ParseModeEnum parseMode)
+        public override DocumentParser CreateDocumentParser(DocumentParser.ParseModeEnum parseMode)
         {
             return new Parser.Parser(this, parseMode);
         }

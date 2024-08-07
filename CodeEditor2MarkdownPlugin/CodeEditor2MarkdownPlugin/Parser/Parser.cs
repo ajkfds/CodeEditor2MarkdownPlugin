@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CodeEditor2.CodeEditor.Parser;
 
 namespace pluginMarkdown.Parser
 {
-    public class Parser : CodeEditor2.CodeEditor.DocumentParser
+    public class Parser : DocumentParser
     {
-        public Parser(Data.MarkdownFile file, CodeEditor2.CodeEditor.DocumentParser.ParseModeEnum parseMode) : base(file, parseMode)
+        public Parser(Data.MarkdownFile file, DocumentParser.ParseModeEnum parseMode) : base(file, parseMode)
         {
             this.document = new CodeEditor2.CodeEditor.CodeDocument(file); // use verilog codedocument
             this.document.CopyTextOnlyFrom(file.CodeDocument);
