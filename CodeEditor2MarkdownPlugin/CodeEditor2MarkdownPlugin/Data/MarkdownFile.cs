@@ -11,19 +11,21 @@ namespace pluginMarkdown.Data
     {
         public static new MarkdownFile Create(string relativePath, CodeEditor2.Data.Project project)
         {
-            //string id = GetID(relativePath, project);
-
-            MarkdownFile fileItem = new MarkdownFile();
-            fileItem.Project = project;
-            fileItem.RelativePath = relativePath;
+            string name;
             if (relativePath.Contains(System.IO.Path.DirectorySeparatorChar))
             {
-                fileItem.Name = relativePath.Substring(relativePath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1);
+                name = relativePath.Substring(relativePath.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1);
             }
             else
             {
-                fileItem.Name = relativePath;
+                name = relativePath;
             }
+            MarkdownFile fileItem = new MarkdownFile()
+            {
+                Project = project,
+                RelativePath = relativePath,
+                Name = name
+            };
 
             return fileItem;
         }
