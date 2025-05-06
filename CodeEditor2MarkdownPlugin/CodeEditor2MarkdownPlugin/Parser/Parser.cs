@@ -28,7 +28,15 @@ namespace pluginMarkdown.Parser
                 string lineText = Document.CreateString(Document.GetLineStartIndex(line), Document.GetLineLength(line));
                 if (lineText.StartsWith("# "))
                 {
-                    colorLine(Style.Color.Comment,line);
+                    colorLine(Style.Color.Header,line);
+                }
+                else if(lineText.StartsWith("## "))
+                {
+                    colorLine(Style.Color.Header, line);
+                }
+                else if(lineText.StartsWith("### "))
+                {
+                    colorLine(Style.Color.Header, line);
                 }
             }
         }

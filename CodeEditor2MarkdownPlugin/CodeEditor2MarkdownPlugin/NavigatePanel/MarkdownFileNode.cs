@@ -22,10 +22,10 @@ namespace pluginMarkdown.NavigatePanel
             }
         }
 
-        public override string Text
-        {
-            get => FileItem.Name;
-        }
+        //public override string Text
+        //{
+        //    get => FileItem.Name;
+        //}
 
 //        private static ajkControls.Primitive.IconImage icon = new ajkControls.Primitive.IconImage(Properties.Resources.text);
         //public override void DrawNode(Graphics graphics, int x, int y, Font font, Color color, Color backgroundColor, Color selectedColor, int lineHeight, bool selected)

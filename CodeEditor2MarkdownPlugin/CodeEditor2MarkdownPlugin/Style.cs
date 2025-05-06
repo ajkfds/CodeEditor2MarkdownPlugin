@@ -11,7 +11,7 @@ namespace pluginMarkdown
         public enum Color : byte
         {
             Normal = 0,
-            Comment = 5,
+            Header = 5,
             Register = 3,
             Net = 9,
             Paramater = 7,
