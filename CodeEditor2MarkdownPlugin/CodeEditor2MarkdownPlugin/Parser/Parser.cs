@@ -11,7 +11,7 @@ namespace pluginMarkdown.Parser
     public class Parser : DocumentParser
     {
         [SetsRequiredMembers]
-        public Parser(Data.MarkdownFile file, DocumentParser.ParseModeEnum parseMode) : base(file, parseMode)
+        public Parser(Data.MarkdownFile file, DocumentParser.ParseModeEnum parseMode, System.Threading.CancellationToken? token) : base(file, parseMode,token)
         {
             this.Document = new CodeEditor2.CodeEditor.CodeDocument(file); // use verilog codeDocument
             this.Document.CopyTextOnlyFrom(file.CodeDocument);

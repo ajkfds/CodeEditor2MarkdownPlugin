@@ -37,9 +37,9 @@ namespace pluginMarkdown.Data
             return new CodeEditor2.NavigatePanel.TextFileNode(this);
         }
 
-        public override DocumentParser CreateDocumentParser(DocumentParser.ParseModeEnum parseMode)
+        public override DocumentParser CreateDocumentParser(DocumentParser.ParseModeEnum parseMode, System.Threading.CancellationToken? token)
         {
-            return new Parser.Parser(this, parseMode);
+            return new Parser.Parser(this, parseMode,token);
         }
 
 
