@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Markdown プレビュー</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-family: monospace;
+      margin-bottom: 1rem;
+    }
+    #preview {
+      padding: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Markdown プレビュー</h1>
+  <input type="file" id="fileInput" accept=".md" />
+  <textarea id="markdownInput" placeholder="Markdownを入力するか、.mdファイルを選択してください"></textarea>
+  <div id="preview"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    const input = document.getElementById('markdownInput');
+    const preview = document.getElementById('preview');
+    const fileInput = document.getElementById('fileInput');
+
+    input.addEventListener('input', () => {
+      preview.innerHTML = marked.parse(input.value);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.name.endsWith('.md')) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          input.value = event.target.result;
+          preview.innerHTML = marked.parse(input.value);
+        };
+        reader.readAsText(file);
+      } else {
+        alert('Markdown (.md) ファイルを選択してください。');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Avalonia.Threading;
+using CodeEditor2.CodeEditor.Parser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CodeEditor2.CodeEditor.Parser;
 
 namespace pluginMarkdown.Data
 {
@@ -34,7 +35,7 @@ namespace pluginMarkdown.Data
 
         protected override CodeEditor2.NavigatePanel.NavigatePanelNode CreateNode()
         {
-            return new CodeEditor2.NavigatePanel.TextFileNode(this);
+            return new NavigatePanel.MarkdownFileNode(this);
         }
 
         public override DocumentParser CreateDocumentParser(DocumentParser.ParseModeEnum parseMode, System.Threading.CancellationToken? token)
@@ -42,6 +43,15 @@ namespace pluginMarkdown.Data
             return new Parser.Parser(this, parseMode,token);
         }
 
-
+        public override void Save()
+        {
+            base.Save();
+            Dispatcher.UIThread.Post(
+            new Action(() =>
+            {
+                ((NavigatePanel.MarkdownFileNode)NavigatePanelNode).UpdatePreVirew();
+            })
+        );
+        }
     }
 }
