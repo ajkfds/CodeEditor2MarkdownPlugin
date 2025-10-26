@@ -17,9 +17,9 @@ public partial class PreviewControl : UserControl
         InitializeComponent();
     }
 
-    volatile bool _loaded;
+    volatile bool _loaded = false;
 
-    public async Task PreView()
+    public async Task PreViewSetup()
     {
         string htmlText;
         var uri = new Uri("avares://CodeEditor2MarkdownPlugin/Assets/html/preview.html");
@@ -35,23 +35,21 @@ public partial class PreviewControl : UserControl
         await browser.LoadLocalHtml(tempPath);
         await browser.WaitForLoadAsync();
         await Task.Delay(100);
+        _loaded = true;
     }
 
     public async Task LoadFile(MarkdownFile mdFile)
     {
-        if (!_loaded) await PreView();
+        if (!_loaded) await PreViewSetup();
         await browser.WaitForLoadAsync();
 
-//        string html = await browser.GetHtml();
-
-        string markdownPath = mdFile.AbsolutePath;
-        string markdown = File.ReadAllText(markdownPath);
+        if (mdFile.CodeDocument == null) return;
+        string markdown = mdFile.CodeDocument.CreateString();
         string escaped = markdown
             .Replace("\\", "\\\\")
             .Replace("'", "\\'")
             .Replace("\r", "")
             .Replace("\n", "\\n");
-        //await browser.ExecuteScriptAsync(@"loadMarkdownContent('# a\n');");
         await browser.ExecuteScriptAsync($"loadMarkdownContent('{escaped}');");
     }
 

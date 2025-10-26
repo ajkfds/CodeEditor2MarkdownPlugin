@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Threading;
-using CodeEditor2;
+using CodeEditor2MarkdownPlugin;
 using HarfBuzzSharp;
 using pluginMarkdown.Data;
 using System;
@@ -53,21 +53,19 @@ namespace pluginMarkdown.NavigatePanel
                 if (TextFile == null) return;
 //                await Tool.ParseHierarchy.ParseAsync(TextFile, Tool.ParseHierarchy.ParseMode.SearchReparseReqestedTree);
             }
-            if( !CodeEditor2MarkdownPlugin.Global.PreviewWindow.IsVisible)
-            {
-                CodeEditor2MarkdownPlugin.Global.PreviewWindow.Show();
-            }
-            if(TextFile is MarkdownFile markdownFile)
-            {
-                await CodeEditor2MarkdownPlugin.Global.PreviewControl.LoadFile(markdownFile);
-            }
-        }
+}
 
-        public async Task UpdatePreVirew()
+        public async Task UpdatePreView()
         {
             if (TextFile is MarkdownFile markdownFile)
             {
-                await CodeEditor2MarkdownPlugin.Global.PreviewControl.LoadFile(markdownFile);
+                if (Global.PreviewWindow == null || !Global.PreviewWindow.IsVisible)
+                {
+                    Global.PreviewWindow = new PreviewWindow();
+                    Global.PreviewWindow.Show(CodeEditor2.Controller.GetMainWindow());
+                }
+
+                if(Global.PreviewControl != null) await Global.PreviewControl.LoadFile(markdownFile);
             }
         }
 
@@ -113,7 +111,7 @@ namespace pluginMarkdown.NavigatePanel
             }
         }
 
-        public void _updateVisual()
+        public new void _updateVisual()
         {
             string text = "null";
             CodeEditor2.Data.TextFile? textFile = TextFile;
@@ -148,7 +146,7 @@ namespace pluginMarkdown.NavigatePanel
                     Avalonia.Media.Color.FromArgb(100, 200, 200, 200)
                     );
             }
-            Controller.NavigatePanel.UpdateVisual();
+            CodeEditor2.Controller.NavigatePanel.UpdateVisual();
         }
     }
 }

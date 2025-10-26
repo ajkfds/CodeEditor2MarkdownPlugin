@@ -1,31 +1,125 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>Markdown Preview</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 2rem;
-      background-color: #f9f9f9;
-    }
-    #preview {
-      padding: 1rem;
-      background: white;
-      border: 1px solid #ccc;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Markdown Preview</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f6f8fa;
+        }
+
+        #preview {
+            padding: 1rem 2rem;
+            background: white;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        pre {
+            background: #f6f8fa;
+            padding: 0.8rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        th, td {
+            border: 1px solid #d0d7de;
+            padding: 0.4em 0.8em;
+        }
+
+        th {
+            background-color: #f3f4f6;
+        }
+    </style>
+
+    <!-- ✅ Highlight.js (GitHubテーマ) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">-->
 </head>
 <body>
-  <h1>Markdown プレビュー</h1>
-  <div id="preview">Loading...</div>
+    <h2>Markdown Preview</h2>
+    <div id="preview">Loading...</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    // C# 側から呼び出す関数
-    function loadMarkdownContent(content) {
-      document.getElementById('preview').innerHTML = marked.parse(content);
-    }
-  </script>
+    <!-- Marked -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.4/lib/marked.umd.js" integrity="sha512-n6PwProqtNBV19DrTi0iA65Dk8rWAJb2K6sS5njnklP/8voLpf0cI9HaclJtd0FJZqY2f6mwXDxBXVy4kdKl9A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/csharp.min.js" integrity="sha512-E508cDPDWSFwXbo0jUpAxAuDtuKyg3qzALy/oyrTBcP07/Xz79ajxXl4LzoNAZw+hr4NAnjPhAdwN0qtmJ9ukg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/verilog.min.js" integrity="sha512-bFy4K4cSBOA7MNrKZThhLeok+EAwwR+R3J0bFVKczK0h9MAVEPVSYMWoIGDs3yOJ2WxLJUEeJ1dkpM8vdasxqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Mermaid (UMD版) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.4/mermaid.min.js" integrity="sha512-bWeB2tgEo86L1JAd2kj9xbbvyytYUAJivlMSzFwL4Lto/0eMM+dG/Tk24znPJat0NqLZl0/E9QQqqk8B4fO2NQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- WaveDrom -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js" integrity="sha512-9qLu2bu3OXj0tOkheMbmVHJNkZE7ycDHCWbgUiKL4qXT/4cCeU8oOof0PWkC+Zo/56GlBfshyZFnSpfs35iDPw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.min.js" integrity="sha512-SDH/iWIRSg0ujndO7Np7wyJF/zs8JHp4tHKU4VJuraJ3ASd2sVorT/3uA2xnHthywvei4/fJYz8Lsbr1SChYBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // Mermaid 初期化
+        mermaid.initialize({ startOnLoad: false, theme: "default" });
+
+        // Marked + Highlight.js 設定
+        marked.setOptions({
+            gfm: true,
+            breaks: false,
+            tables: true,
+            highlight: function (code, lang) {
+                try {
+                    if (lang && hljs.getLanguage(lang)) {
+                        return hljs.highlight(code, { language: lang }).value;
+                    } else {
+                        return hljs.highlightAuto(code).value;
+                    }
+                } catch (e) {
+                    console.warn("Highlight error:", e);
+                    return code;
+                }
+            }
+        });
+
+        // Markdown→HTML
+        function loadMarkdownContent(content) {
+            const html = marked.parse(content);
+            const preview = document.getElementById('preview');
+            preview.innerHTML = html;
+
+            renderMermaid(preview);
+            renderWaveDrom(preview);
+            if (window.hljs && typeof hljs.highlightAll === 'function') {
+                hljs.highlightAll();
+            }
+        }
+
+        // ```mermaid``` の描画
+        function renderMermaid(root) {
+            const blocks = root.querySelectorAll('code.language-mermaid');
+            blocks.forEach(block => {
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = block.textContent;
+                block.parentNode.replaceWith(div);
+            });
+            mermaid.run({ querySelector: ".mermaid" });
+        }
+
+        // ```wavedrom``` の描画
+        function renderWaveDrom(root) {
+            const blocks = root.querySelectorAll('code.language-wavedrom');
+            blocks.forEach(block => {
+                const script = document.createElement('script');
+                script.type = 'WaveDrom';
+                script.textContent = block.textContent;
+                block.parentNode.replaceWith(script);
+            });
+            if (window.WaveDrom) WaveDrom.ProcessAll();
+        }
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿using Avalonia.Threading;
+using CodeEditor2.CodeEditor;
 using CodeEditor2.CodeEditor.Parser;
 using System;
 using System.Collections.Generic;
@@ -40,18 +41,28 @@ namespace pluginMarkdown.Data
 
         public override DocumentParser CreateDocumentParser(DocumentParser.ParseModeEnum parseMode, System.Threading.CancellationToken? token)
         {
+            if(parseMode==DocumentParser.ParseModeEnum.EditParse) StartAsyncPreviewUpdate();
             return new Parser.Parser(this, parseMode,token);
         }
 
+        public override void AcceptParsedDocument(ParsedDocument newParsedDocument)
+        {
+            base.AcceptParsedDocument(newParsedDocument);
+        }
         public override void Save()
         {
             base.Save();
-            Dispatcher.UIThread.Post(
-            new Action(() =>
+            StartAsyncPreviewUpdate();
+        }
+
+        private void StartAsyncPreviewUpdate()
+        {
+            Dispatcher.UIThread.InvokeAsync(
+            new Action(async () =>
             {
-                ((NavigatePanel.MarkdownFileNode)NavigatePanelNode).UpdatePreVirew();
+                await ((NavigatePanel.MarkdownFileNode)NavigatePanelNode).UpdatePreView();
             })
-        );
+            );
         }
     }
 }

@@ -8,7 +8,7 @@ namespace CodeEditor2MarkdownPlugin
 {
     public static class Global
     {
-        public static CodeEditor2MarkdownPlugin.PreviewWindow PreviewWindow = new CodeEditor2MarkdownPlugin.PreviewWindow();
-        public static PreviewControl PreviewControl { get => PreviewWindow.PreviewControl; }
+        public static CodeEditor2MarkdownPlugin.PreviewWindow? PreviewWindow = null;
+        public static PreviewControl? PreviewControl { get => PreviewWindow?.PreviewControl; }
     }
 }
