@@ -14,6 +14,7 @@ namespace pluginMarkdown.Parser
         public Parser(Data.MarkdownFile file, DocumentParser.ParseModeEnum parseMode, System.Threading.CancellationToken? token) : base(file, parseMode,token)
         {
             this.Document = new CodeEditor2.CodeEditor.CodeDocument(file); // use verilog codeDocument
+            if (file.CodeDocument == null) return;
             this.Document.CopyTextOnlyFrom(file.CodeDocument);
             this.ParseMode = parseMode;
             this.TextFile = file as CodeEditor2.Data.TextFile;
@@ -38,17 +39,19 @@ namespace pluginMarkdown.Parser
                 {
                     colorLine(Style.Color.Header, line);
                 }
+                else if (lineText.StartsWith("```"))
+                {
+                    colorLine(Style.Color.Identifier, line);
+                }
+
             }
         }
 
         private void colorLine(Style.Color color,int line)
         {
             int start = Document.GetLineStartIndex(line);
-            int end = start + Document.GetLineLength(line);
-            for (int i = start; i < end; i++)
-            {
-                Document.TextColors.SetColorAt(i, (byte)color);
-            }
+            int length = Document.GetLineLength(line);
+            Document.TextColors.SetColorAt(start, (byte)color,length);
         }
     }
 }
