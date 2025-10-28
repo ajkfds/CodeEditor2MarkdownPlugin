@@ -50,7 +50,13 @@ public partial class PreviewControl : UserControl
             .Replace("'", "\\'")
             .Replace("\r", "")
             .Replace("\n", "\\n");
-        await browser.ExecuteScriptAsync($"loadMarkdownContent('{escaped}');");
+        try
+        {
+            await browser.ExecuteScriptAsync($"loadMarkdownContent('{escaped}');");
+        }
+        catch (Exception ex) {
+            return;
+        }
     }
 
 }

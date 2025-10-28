@@ -65,7 +65,10 @@ namespace pluginMarkdown.NavigatePanel
                     Global.PreviewWindow.Show(CodeEditor2.Controller.GetMainWindow());
                 }
 
-                if(Global.PreviewControl != null) await Global.PreviewControl.LoadFile(markdownFile);
+                if (Global.PreviewControl != null)
+                {
+                    await Global.PreviewControl.LoadFile(markdownFile);
+                }
             }
         }
 
