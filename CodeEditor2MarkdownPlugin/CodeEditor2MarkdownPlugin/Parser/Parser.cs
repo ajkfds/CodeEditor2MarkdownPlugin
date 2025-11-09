@@ -19,7 +19,7 @@ namespace pluginMarkdown.Parser
             this.ParseMode = parseMode;
             this.TextFile = file as CodeEditor2.Data.TextFile;
 
-            ParsedDocument = new CodeEditor2.CodeEditor.ParsedDocument(file, file.CodeDocument.Version, parseMode);
+            ParsedDocument = new CodeEditor2.CodeEditor.ParsedDocument(file,file.RelativePath, file.CodeDocument.Version, parseMode);
         }
 
         public override void Parse()
