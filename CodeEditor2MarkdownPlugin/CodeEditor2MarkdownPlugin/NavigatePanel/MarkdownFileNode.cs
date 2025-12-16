@@ -44,7 +44,7 @@ namespace pluginMarkdown.NavigatePanel
 
             UpdateVisual();
 
-            if (TextFile.ParseValid && !TextFile.ReparseRequested)
+            if (!TextFile.ReparseRequested)
             {
                 // skip parse
             }

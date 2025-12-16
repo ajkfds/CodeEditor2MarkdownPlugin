@@ -22,7 +22,7 @@ namespace pluginMarkdown.Parser
             ParsedDocument = new CodeEditor2.CodeEditor.ParsedDocument(file,file.RelativePath, file.CodeDocument.Version, parseMode);
         }
 
-        public override async Task Parse()
+        public override async Task ParseAsync()
         {
             for(int line = 1; line<Document.Lines; line++)
             {
