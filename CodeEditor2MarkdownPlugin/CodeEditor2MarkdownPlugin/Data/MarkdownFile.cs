@@ -45,9 +45,9 @@ namespace pluginMarkdown.Data
             return new Parser.Parser(this, parseMode,token);
         }
 
-        public override void AcceptParsedDocument(ParsedDocument newParsedDocument)
+        public override async Task AcceptParsedDocumentAsync(ParsedDocument newParsedDocument)
         {
-            base.AcceptParsedDocument(newParsedDocument);
+            await base.AcceptParsedDocumentAsync(newParsedDocument);
         }
         public override void Save()
         {

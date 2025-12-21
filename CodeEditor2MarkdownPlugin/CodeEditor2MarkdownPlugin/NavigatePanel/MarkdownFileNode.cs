@@ -29,31 +29,40 @@ namespace pluginMarkdown.NavigatePanel
 
         public override async void OnSelected()
         {
-            base.OnSelected(); // update context menu
-
-            if (TextFile == null)
+            try
             {
-//                if (NodeSelected != null) NodeSelected();
-                Update();
-                return;
+                base.OnSelected(); // update context menu
+
+                if (TextFile == null)
+                {
+                    //                if (NodeSelected != null) NodeSelected();
+                    await UpdateAsync();
+                    return;
+                }
+
+
+                await CodeEditor2.Controller.CodeEditor.SetTextFileAsync(TextFile, true);
+                //            if (NodeSelected != null) NodeSelected();
+
+                UpdateVisual();
+
+                if (!TextFile.ReparseRequested)
+                {
+                    // skip parse
+                }
+                else
+                {
+                    if (TextFile == null) return;
+                    //                await Tool.ParseHierarchy.ParseAsync(TextFile, Tool.ParseHierarchy.ParseMode.SearchReparseReqestedTree);
+                }
+
             }
-
-
-            CodeEditor2.Controller.CodeEditor.SetTextFile(TextFile, true);
-//            if (NodeSelected != null) NodeSelected();
-
-            UpdateVisual();
-
-            if (!TextFile.ReparseRequested)
+            catch
             {
-                // skip parse
+                if(System.Diagnostics.Debugger.IsAttached) System.Diagnostics.Debugger.Break();
             }
-            else
-            {
-                if (TextFile == null) return;
-//                await Tool.ParseHierarchy.ParseAsync(TextFile, Tool.ParseHierarchy.ParseMode.SearchReparseReqestedTree);
-            }
-}
+            
+        }
 
         public async Task UpdatePreView()
         {
