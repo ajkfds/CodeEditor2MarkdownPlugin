@@ -110,21 +110,11 @@ namespace pluginMarkdown.NavigatePanel
 
         public override void UpdateVisual()
         {
-            if (Dispatcher.UIThread.CheckAccess())
+            if (!Dispatcher.UIThread.CheckAccess())
             {
-                _updateVisual();
+                if (System.Diagnostics.Debugger.IsAttached) System.Diagnostics.Debugger.Break();
             }
-            else
-            {
-                Dispatcher.UIThread.Post(() =>
-                {
-                    _updateVisual();
-                });
-            }
-        }
 
-        public new void _updateVisual()
-        {
             string text = "null";
             CodeEditor2.Data.TextFile? textFile = TextFile;
             if (textFile != null) text = textFile.Name;
