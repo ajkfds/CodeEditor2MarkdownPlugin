@@ -49,9 +49,9 @@ namespace pluginMarkdown.Data
         {
             await base.AcceptParsedDocumentAsync(newParsedDocument);
         }
-        public override void Save()
+        public override async Task SaveAsync()
         {
-            base.Save();
+            await base.SaveAsync();
             StartAsyncPreviewUpdate();
         }
 
