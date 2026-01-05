@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,13 @@ namespace pluginMarkdown.FileTypes
         public override CodeEditor2.Data.File CreateFile(string relativeFilePath, CodeEditor2.Data.Project project)
         {
             return Data.MarkdownFile.Create(relativeFilePath, project);
+        }
+        public override IImage GetIconImage()
+        {
+            return AjkAvaloniaLibs.Libs.Icons.GetSvgBitmap(
+                    "CodeEditor2/Assets/Icons/markdown.svg",
+                    Avalonia.Media.Color.FromArgb(100, 200, 200, 200)
+                );
         }
     }
 
