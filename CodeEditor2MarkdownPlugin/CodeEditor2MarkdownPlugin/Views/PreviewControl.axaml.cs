@@ -32,6 +32,7 @@ public partial class PreviewControl : UserControl
         var tempPath = Path.Combine(Path.GetTempPath(), "temp.html");
         File.WriteAllText(tempPath, htmlText);
 
+
         await browser.LoadLocalHtml(tempPath);
         await browser.WaitForLoadAsync();
         await Task.Delay(100);
