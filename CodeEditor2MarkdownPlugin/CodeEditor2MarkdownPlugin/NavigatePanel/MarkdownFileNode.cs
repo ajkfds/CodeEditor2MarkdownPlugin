@@ -148,5 +148,9 @@ namespace pluginMarkdown.NavigatePanel
             }
             CodeEditor2.Controller.NavigatePanel.UpdateVisual();
         }
+
+        public static new Action<ContextMenu>? CustomizeSpecificNodeContextMenu;
+        protected override Action<ContextMenu>? customizeSpecificNodeContextMenu => CustomizeSpecificNodeContextMenu;
+
     }
 }
