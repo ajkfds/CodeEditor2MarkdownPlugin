@@ -11,7 +11,7 @@ namespace pluginMarkdown.Data
 {
     public class MarkdownFile : CodeEditor2.Data.TextFile
     {
-        public static new MarkdownFile Create(string relativePath, CodeEditor2.Data.Project project)
+        public static new Task<MarkdownFile> CreateAsync(string relativePath, CodeEditor2.Data.Project project)
         {
             string name;
             if (relativePath.Contains(System.IO.Path.DirectorySeparatorChar))
@@ -29,7 +29,7 @@ namespace pluginMarkdown.Data
                 Name = name
             };
 
-            return fileItem;
+            return Task.FromResult(fileItem);
         }
 
 
