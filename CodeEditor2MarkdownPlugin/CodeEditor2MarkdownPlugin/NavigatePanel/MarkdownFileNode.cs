@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Threading;
 using CodeEditor2MarkdownPlugin;
 using HarfBuzzSharp;
