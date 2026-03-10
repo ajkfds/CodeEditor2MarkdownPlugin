@@ -14,7 +14,7 @@ namespace CodeEditor2MarkdownPlugin.Views
     {
         using var playwright = await Playwright.CreateAsync();
 
-        // Edge (Chromium) を起動
+        // Edge (Chromium) 繧定ｵｷ蜍・
         var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
             Channel = "msedge",
@@ -38,7 +38,7 @@ namespace CodeEditor2MarkdownPlugin.Views
 
         var page = await context.NewPageAsync();
 
-        //// 最後まで待つ or スクリーンショットを取る
+        //// 譛蠕後∪縺ｧ蠕・▽ or 繧ｹ繧ｯ繝ｪ繝ｼ繝ｳ繧ｷ繝ｧ繝・ヨ繧貞叙繧・
         //await page.WaitForTimeoutAsync(3000);
         //await page.ScreenshotAsync(new PageScreenshotOptions { Path = "sannysoft.png", FullPage = true });
         await page.GotoAsync("https://www.google.com/");
