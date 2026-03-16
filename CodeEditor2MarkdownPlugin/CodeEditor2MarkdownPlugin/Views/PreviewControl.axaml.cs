@@ -55,7 +55,7 @@ public partial class PreviewControl : UserControl
         {
             await browser.ExecuteScriptAsync($"loadMarkdownContent('{escaped}');");
         }
-        catch (Exception ex) {
+        catch (Exception) {
             return;
         }
     }

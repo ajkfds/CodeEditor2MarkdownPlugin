@@ -19,13 +19,6 @@ namespace pluginMarkdown.NavigatePanel
 
         }
 
-        public CodeEditor2.Data.TextFile TextFile
-        {
-            get
-            {
-                return Item as CodeEditor2.Data.TextFile;
-            }
-        }
 
         public override async void OnSelected()
         {
