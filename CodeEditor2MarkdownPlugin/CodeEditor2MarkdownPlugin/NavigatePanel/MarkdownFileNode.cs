@@ -139,7 +139,7 @@ namespace pluginMarkdown.NavigatePanel
                     Avalonia.Media.Color.FromArgb(100, 200, 200, 200)
                     );
             }
-            CodeEditor2.Controller.NavigatePanel.UpdateVisual();
+            CodeEditor2.Controller.NavigatePanel.UpdateVisualPost();
         }
 
         public static new Action<ContextMenu>? CustomizeSpecificNodeContextMenu;
