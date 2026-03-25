@@ -117,7 +117,7 @@ namespace pluginMarkdown.NavigatePanel
             {
                 Image = AjkAvaloniaLibs.Libs.Icons.GetSvgBitmap(
                     "CodeEditor2/Assets/Icons/questionDocument.svg",
-                    Avalonia.Media.Color.FromArgb(100, 200, 200, 200)
+                    CodeEditor2.Global.Color_Gray
                     );
                 Nodes.Clear();
                 return;
@@ -127,16 +127,16 @@ namespace pluginMarkdown.NavigatePanel
             {
                 Image = AjkAvaloniaLibs.Libs.Icons.GetSvgBitmap(
                     "CodeEditor2/Assets/Icons/markdown.svg",
-                    Avalonia.Media.Color.FromArgb(100, 200, 200, 200),
+                    CodeEditor2.Global.Color_Gray,
                     "CodeEditor2/Assets/Icons/shine.svg",
-                    Avalonia.Media.Color.FromArgb(255, 255, 255, 200)
+                    CodeEditor2.Global.Color_Shine
                     );
             }
             else
             {
                 Image = AjkAvaloniaLibs.Libs.Icons.GetSvgBitmap(
                     "CodeEditor2/Assets/Icons/markdown.svg",
-                    Avalonia.Media.Color.FromArgb(100, 200, 200, 200)
+                    CodeEditor2.Global.Color_Gray
                     );
             }
             CodeEditor2.Controller.NavigatePanel.UpdateVisualPost();
