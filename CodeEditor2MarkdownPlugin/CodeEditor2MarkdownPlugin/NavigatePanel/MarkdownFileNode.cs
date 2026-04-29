@@ -61,15 +61,21 @@ namespace pluginMarkdown.NavigatePanel
         {
             if (TextFile is MarkdownFile markdownFile)
             {
-                if (Global.PreviewWindow == null || !Global.PreviewWindow.IsVisible)
+                try
                 {
-                    Global.PreviewWindow = new PreviewWindow();
-                    Global.PreviewWindow.Show(CodeEditor2.Controller.GetMainWindow());
-                }
+                    if (Global.PreviewWindow == null || !Global.PreviewWindow.IsVisible)
+                    {
+                        Global.PreviewWindow = new PreviewWindow();
+                        Global.PreviewWindow.Show(CodeEditor2.Controller.GetMainWindow());
+                    }
 
-                if (Global.PreviewControl != null)
+                    if (Global.PreviewControl != null)
+                    {
+                        await Global.PreviewControl.LoadFile(markdownFile);
+                    }
+                }catch(Exception ex)
                 {
-                    await Global.PreviewControl.LoadFile(markdownFile);
+                    CodeEditor2.Controller.AppendLog("failed to launch markdown preview", Avalonia.Media.Colors.Red);
                 }
             }
         }
