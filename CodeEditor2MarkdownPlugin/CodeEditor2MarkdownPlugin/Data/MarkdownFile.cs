@@ -47,9 +47,9 @@ namespace pluginMarkdown.Data
             return new Parser.Parser(this, parseMode,token);
         }
 
-        public override async Task AcceptParsedDocumentAsync(ParsedDocument newParsedDocument)
+        public override async Task AcceptParsedDocumentAsync(CodeEditor2.CodeEditor.Parser.DocumentParser parser)
         {
-            await base.AcceptParsedDocumentAsync(newParsedDocument);
+            await base.AcceptParsedDocumentAsync(parser);
         }
         public override async Task SaveAsync()
         {
