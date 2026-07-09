@@ -66,7 +66,8 @@ namespace pluginMarkdown.NavigatePanel
                     if (Global.PreviewWindow == null || !Global.PreviewWindow.IsVisible)
                     {
                         Global.PreviewWindow = new PreviewWindow();
-                        await CodeEditor2.Controller.ShowDialog(Global.PreviewWindow);
+                        Global.PreviewWindow.Show();
+//                        await CodeEditor2.Controller.ShowDialog(Global.PreviewWindow);
                     }
 
                     if (Global.PreviewControl != null)
