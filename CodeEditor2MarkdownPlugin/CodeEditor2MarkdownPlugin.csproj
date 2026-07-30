@@ -30,6 +30,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ajkCefGlue\ajkCefGlue\ajkCefGlue.csproj" />
     <ProjectReference Include="..\..\CodeEditor2Plugin\CodeEditor2Plugin\CodeEditor2Plugin\CodeEditor2Plugin.csproj" />
-    <ProjectReference Include="..\..\CodeEditor2\CodeEditor2\CodeEditor2\CodeEditor2.csproj" />
+    <ProjectReference Include="..\..\CodeEditor2\CodeEditor2\CodeEditor2.csproj" />
   </ItemGroup>
 </Project>
